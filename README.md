@@ -10,16 +10,18 @@ This solver models 1D compressible fluid flow by solving the conservation laws (
 $$\frac{\partial \rho}{\partial t} + \frac{\partial (\rho u)}{\partial x} = 0$$
 
 ### Momentum Equation
-$$\frac{\partial (\rho uQT}{\partial t} + \frac{\partial (\rho u^2 + P)}{\partial x} + f_{\text{loss}} = 0$$
-*Note: The friction loss term $f_{\text{loss}}$ is dynamically calculated using the friction factor derived from Haaland's equation, accounting for the pipe's internal roughness.*
+$$\frac{\partial (\rho u)}{\partial t} + \frac{\partial (\rho u^2 + P)}{\partial x} + f_{\text{loss}} = 0$$
+
+* **Note**: The friction loss term $f_{\text{loss}}$ is dynamically calculated using the friction factor derived from Haaland's equation, accounting for the pipe's internal roughness.
 
 ### Energy Equation
 $$\frac{\partial (\rho E)}{\partial t} + \frac{\partial (\rho u H)}{\partial x} = \frac{Q_{\text{in}}}{A}$$
-*Note: Total internal energy is defined as $E = u_{\text{int}} + \frac{1}{2}u^2$, and total enthalpy is defined as $H = h + \frac{1}{2}u^2$.*
+
+* **Note**: Total internal energy is defined as $E = u_{\text{int}} + \frac{1}{2}u^2$, and total enthalpy is defined as $H = h + \frac{1}{2}u^2$.
 
 ## 2. Features
 
-- **High-Precision Property Calculation**: Embedded with the `iapws` library to dynamically update density $\rho$, temperature $T$, viscosity $\mu$, and Prandtl number $Pr$ at each time step based on local pressure $P$ and enthalpy $h$.
+- **High-Precision Property Calculation**: Embedded with the `iapws` library to dynamically update density *ρ*, temperature *T*, viscosity *μ*, and Prandtl number *Pr* at each time step based on local pressure *P* and enthalpy *h*.
 - **4-Layer Thermal Resistance Model**: Simulates transient thermal behavior across a conjugate network: Steam boundary $\rightarrow$ Internal convective heat transfer $\rightarrow$ Steel pipe wall thermal capacity $\rightarrow$ Insulation thermal conduction $\rightarrow$ Ambient convective heat dissipation.
 - **Robust Numerical Stability**: Employs a fully implicit method via `scipy.optimize.fsolve` to simultaneously solve the non-linear residual equations across all spatial nodes, ensuring robust convergence.
 
